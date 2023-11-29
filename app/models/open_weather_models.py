@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Dict
+from typing import List, Dict, Union
 
 
 class WeatherCondition(BaseModel):
@@ -25,7 +25,36 @@ class WeatherForecast(BaseModel):
     clouds: Dict[str, int]
     wind: Dict[str, float]
     sys: Dict[str, str]
-    dt_txt: str  # Data e hora da previsão como string
+    dt_txt: str
+
+
+class Wind(BaseModel):
+    speed: float
+    deg: int
+
+
+class Clouds(BaseModel):
+    all: int
+
+
+class Sys(BaseModel):
+    pod: str
+
+
+class Coord(BaseModel):
+    lat: float
+    lon: float
+
+
+class City(BaseModel):
+    id: int
+    name: str
+    coord: Coord
+    country: str
+    population: int
+    timezone: int
+    sunrise: int
+    sunset: int
 
 
 class OpenWeatherResponse(BaseModel):
@@ -33,4 +62,4 @@ class OpenWeatherResponse(BaseModel):
     message: int
     cnt: int
     list: List[WeatherForecast]
-    city: Dict[str, Union[str, int]]
+    city: City
