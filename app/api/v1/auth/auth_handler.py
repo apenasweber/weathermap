@@ -3,7 +3,7 @@ from typing import Dict
 
 import jwt
 
-from app.core.settings import settings
+from app.core.config import settings
 
 JWT_SECRET = settings.SECRET_KEY
 JWT_ALGORITHM = settings.JWT_ALGORITHM
