@@ -41,7 +41,7 @@ class OpenWeatherMapsAPI:
             logger.error(f"Erro ao obter previsão do tempo por coordenadas: {e}")
             return None
 
-    def request_open_weather_api(self, params: Dict) -> Optional[List[Dict]]:
+    def request_open_weather_api(self, params: Dict) -> Optional[Dict]:
         try:
             response = requests.get(self.open_weather_maps_forecast_url, params=params)
             logger.info(response.text)
@@ -52,7 +52,7 @@ class OpenWeatherMapsAPI:
             # Salva os dados no MongoDB
             save_weather_data(weather_data)
 
-            return weather_data.list
+            return {"list": weather_data.list, "city": weather_data.city}
         except requests.RequestException as e:
             logger.error(f"Erro na solicitação da API OpenWeather: {e}")
             return None

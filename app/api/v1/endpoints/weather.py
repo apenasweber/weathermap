@@ -10,6 +10,10 @@ from app.models.api_response_models import (
 )
 
 router = APIRouter()
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 def get_weather_service() -> OpenWeatherMapsAPI:
@@ -23,18 +27,19 @@ def weather_forecast(
     lon: Optional[float] = None,
     weather_service: OpenWeatherMapsAPI = Depends(get_weather_service),
 ):
-    open_weather_data: OpenWeatherResponse = (
+    forecast_data = (
         weather_service.get_weather_forecast_by_city(city)
         if city
         else weather_service.get_weather_forecast_by_coordinates(lat, lon)
     )
 
-    if open_weather_data is None or open_weather_data.list is None:
+    if forecast_data is None or "list" not in forecast_data:
         raise HTTPException(
             status_code=500, detail="Error fetching data from OpenWeatherMaps"
         )
+
     forecasts = []
-    for forecast in open_weather_data.list:
+    for forecast in forecast_data["list"]:
         conditions = [
             SimpleWeatherCondition(main=cond.main, description=cond.description)
             for cond in forecast.weather
@@ -47,7 +52,8 @@ def weather_forecast(
         )
         forecasts.append(simple_forecast)
 
+    city_name = forecast_data["city"].name if forecast_data["city"] else "Unknown"
     return WeatherForecastResponse(
-        city_name=open_weather_data.city.get("name", "Unknown"),
+        city_name=city_name,
         forecasts=forecasts,
     )
