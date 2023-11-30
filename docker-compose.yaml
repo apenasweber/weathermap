@@ -8,6 +8,7 @@ services:
       - mongodb
     environment:
       - MONGO_URL=mongodb://mongodb:27017/weathermap
+      - PYTHONPATH=/app
   mongodb:
     image: mongo:latest
     ports:

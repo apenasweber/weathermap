@@ -3,6 +3,7 @@ FROM python:3.8
 
 # Definir o diretório de trabalho dentro do container
 WORKDIR /app
+ENV PYTHONPATH=/app
 
 # Copiar os arquivos 'requirements.txt' e instalar as dependências
 COPY requirements.txt .
