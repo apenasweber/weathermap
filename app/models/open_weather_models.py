@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ConfigDict
-from typing import List, Dict, Union
+from typing import List, Dict
 
 
 class WeatherCondition(BaseModel):
