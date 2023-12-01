@@ -1,4 +1,7 @@
+from typing import List
+
 from fastapi import APIRouter, HTTPException
+
 from app.api.v1.auth.auth_handler import signJWT
 from app.core.config import settings
 

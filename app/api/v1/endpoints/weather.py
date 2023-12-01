@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Query
 from app.api.v1.auth.auth_bearer import JWTBearer
 from typing import Optional
 
@@ -29,15 +29,31 @@ def get_weather_service() -> OpenWeatherMapsAPI:
 )
 def weather_forecast(
     city: Optional[str] = None,
-    lat: Optional[float] = None,
-    lon: Optional[float] = None,
+    lat: Optional[float] = Query(None, description="Latitude"),
+    lon: Optional[float] = Query(None, description="Longitude"),
     weather_service: OpenWeatherMapsAPI = Depends(get_weather_service),
 ):
-    forecast_data = (
-        weather_service.get_weather_forecast_by_city(city)
-        if city
-        else weather_service.get_weather_forecast_by_coordinates(lat, lon)
-    )
+    # Checa se apenas cidade ou apenas latitude e longitude foram fornecidos
+    if city and (lat is not None or lon is not None):
+        raise HTTPException(
+            status_code=400,
+            detail="Provide either city name or both latitude and longitude, but not both.",
+        )
+
+    # Se apenas cidade é fornecida
+    if city:
+        forecast_data = weather_service.get_weather_forecast_by_city(city)
+
+    # Se apenas latitude e longitude são fornecidas
+    elif lat is not None and lon is not None:
+        forecast_data = weather_service.get_weather_forecast_by_coordinates(lat, lon)
+
+    # Se nenhum dos dois é fornecido
+    else:
+        raise HTTPException(
+            status_code=400,
+            detail="Either city name or both latitude and longitude must be provided.",
+        )
 
     if forecast_data is None or "list" not in forecast_data:
         raise HTTPException(
@@ -46,9 +62,10 @@ def weather_forecast(
 
     forecasts = []
     for forecast in forecast_data["list"]:
+        print(type(forecast))
         conditions = [
             SimpleWeatherCondition(main=cond.main, description=cond.description)
-            for cond in forecast["weather"]
+            for cond in forecast.weather
         ]
         simple_forecast = SimpleForecast(
             date=forecast.dt_txt,
