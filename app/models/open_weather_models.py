@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import List, Dict, Union
 
 
@@ -9,6 +9,9 @@ class WeatherCondition(BaseModel):
     icon: str
 
 
+WeatherCondition.__config__ = ConfigDict(arbitrary_types_allowed=True)
+
+
 class MainInfo(BaseModel):
     temp: float
     feels_like: float
@@ -16,6 +19,9 @@ class MainInfo(BaseModel):
     temp_max: float
     pressure: int
     humidity: int
+
+
+MainInfo.__config__ = ConfigDict(arbitrary_types_allowed=True)
 
 
 class WeatherForecast(BaseModel):
@@ -28,22 +34,37 @@ class WeatherForecast(BaseModel):
     dt_txt: str
 
 
+WeatherForecast.__config__ = ConfigDict(arbitrary_types_allowed=True)
+
+
 class Wind(BaseModel):
     speed: float
     deg: int
+
+
+Wind.__config__ = ConfigDict(arbitrary_types_allowed=True)
 
 
 class Clouds(BaseModel):
     all: int
 
 
+Clouds.__config__ = ConfigDict(arbitrary_types_allowed=True)
+
+
 class Sys(BaseModel):
     pod: str
+
+
+Sys.__config__ = ConfigDict(arbitrary_types_allowed=True)
 
 
 class Coord(BaseModel):
     lat: float
     lon: float
+
+
+Coord.__config__ = ConfigDict(arbitrary_types_allowed=True)
 
 
 class City(BaseModel):
@@ -57,9 +78,15 @@ class City(BaseModel):
     sunset: int
 
 
+City.__config__ = ConfigDict(arbitrary_types_allowed=True)
+
+
 class OpenWeatherResponse(BaseModel):
     cod: str
     message: int
     cnt: int
     list: List[WeatherForecast]
     city: City
+
+
+OpenWeatherResponse.__config__ = ConfigDict(arbitrary_types_allowed=True)

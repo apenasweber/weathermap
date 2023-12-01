@@ -1,10 +1,13 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import List
 
 
 class SimpleWeatherCondition(BaseModel):
     main: str
     description: str
+
+
+SimpleWeatherCondition.__config__ = ConfigDict(arbitrary_types_allowed=True)
 
 
 class SimpleForecast(BaseModel):
@@ -14,6 +17,12 @@ class SimpleForecast(BaseModel):
     conditions: List[SimpleWeatherCondition]
 
 
+SimpleForecast.__config__ = ConfigDict(arbitrary_types_allowed=True)
+
+
 class WeatherForecastResponse(BaseModel):
     city_name: str
     forecasts: List[SimpleForecast]
+
+
+WeatherForecastResponse.__config__ = ConfigDict(arbitrary_types_allowed=True)
