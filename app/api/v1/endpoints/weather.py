@@ -179,3 +179,39 @@ def get_weather_data_by_id(document_id: str):
         raise HTTPException(
             status_code=500, detail="Erro ao buscar dados do banco de dados"
         )
+
+
+@router.delete("/delete-all", dependencies=[Depends(JWTBearer())])
+def delete_all_weather_data():
+    try:
+        db = MongoDB.get_database()
+        weather_collection = db.weather_data
+        # Deleta todos os documentos na coleção
+        deletion_result = weather_collection.delete_many({})
+        return {
+            "message": f"Total de documentos deletados: {deletion_result.deleted_count}"
+        }
+    except Exception as e:
+        logger.error("Error occurred while deleting data from the database", exc_info=e)
+        raise HTTPException(
+            status_code=500, detail="Erro ao deletar dados do banco de dados"
+        )
+
+
+@router.delete("/delete-by-id/{document_id}", dependencies=[Depends(JWTBearer())])
+def delete_weather_data_by_id(document_id: str):
+    try:
+        db = MongoDB.get_database()
+        weather_collection = db.weather_data
+        # Deleta o documento especificado pelo ID
+        deletion_result = weather_collection.delete_one({"_id": ObjectId(document_id)})
+        if deletion_result.deleted_count == 0:
+            raise HTTPException(
+                status_code=404, detail="Documento não encontrado ou já deletado"
+            )
+        return {"message": "Documento deletado com sucesso"}
+    except Exception as e:
+        logger.error("Error occurred while deleting data from the database", exc_info=e)
+        raise HTTPException(
+            status_code=500, detail="Erro ao deletar dados do banco de dados"
+        )
