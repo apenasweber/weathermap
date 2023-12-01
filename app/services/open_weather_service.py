@@ -44,7 +44,6 @@ class OpenWeatherMapsAPI:
     def request_open_weather_api(self, params: Dict) -> Optional[Dict]:
         try:
             response = requests.get(self.open_weather_maps_forecast_url, params=params)
-            logger.info(response.text)
             response.raise_for_status()
             data = response.json()
             weather_data = OpenWeatherResponse(**data)
