@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, Depends
+from app.api.v1.auth.auth_bearer import JWTBearer
 from typing import Optional
 
 from app.services.open_weather_service import OpenWeatherMapsAPI
-from app.models.open_weather_models import OpenWeatherResponse
 from app.models.api_response_models import (
     WeatherForecastResponse,
     SimpleForecast,
@@ -22,7 +22,11 @@ def get_weather_service() -> OpenWeatherMapsAPI:
     return OpenWeatherMapsAPI()
 
 
-@router.get("/forecast", response_model=WeatherForecastResponse)
+@router.get(
+    "/forecast",
+    response_model=WeatherForecastResponse,
+    dependencies=[Depends(JWTBearer())],
+)
 def weather_forecast(
     city: Optional[str] = None,
     lat: Optional[float] = None,
@@ -78,7 +82,9 @@ def convert_objectid_to_str(data):
     return data
 
 
-@router.get("/all", response_model=WeatherForecastResponse)
+@router.get(
+    "/all", response_model=WeatherForecastResponse, dependencies=[Depends(JWTBearer())]
+)
 def get_all_weather_data():
     try:
         db = MongoDB.get_database()
@@ -117,7 +123,11 @@ def get_all_weather_data():
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/by-id/{document_id}", response_model=WeatherForecastResponse)
+@router.get(
+    "/by-id/{document_id}",
+    response_model=WeatherForecastResponse,
+    dependencies=[Depends(JWTBearer())],
+)
 def get_weather_data_by_id(document_id: str):
     try:
         db = MongoDB.get_database()
