@@ -8,7 +8,7 @@ class SimpleWeatherCondition(BaseModel):
 
 
 class SimpleForecast(BaseModel):
-    date: str  # Data e hora da previsão
+    date: str
     temperature: float
     feels_like: float
     conditions: List[SimpleWeatherCondition]
