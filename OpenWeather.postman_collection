@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "f1858cee-1c4d-458d-aad9-9a37a3e513fc",
+		"name": "Open Weather Map",
+		"description": "# Endpoints da API\n\n### 1\\. Previsão do Tempo por Cidade ou Coordenadas\n\n- **Método e Caminho**: `GET /forecast`\n- **Parâmetros**:\n    - `city` (opcional): Nome da cidade para a previsão do tempo.\n    - `lat` (opcional): Latitude para a previsão do tempo.\n    - `lon` (opcional): Longitude para a previsão do tempo.\n- **Descrição**: Retorna a previsão do tempo com base no nome da cidade ou nas coordenadas de latitude e longitude fornecidas.\n    \n\n### 2\\. Obter Todos os Dados de Previsão do Tempo\n\n- **Método e Caminho**: `GET /all`\n- **Descrição**: Recupera todos os dados de previsão do tempo armazenados no banco de dados.\n    \n\n### 3\\. Obter Dados de Previsão do Tempo por ID\n\n- **Método e Caminho**: `GET /by-id/{document_id}`\n- **Parâmetros**:\n    - `document_id`: ID do documento a ser recuperado do banco de dados.\n- **Descrição**: Busca e retorna os dados de previsão do tempo associados ao ID do documento especificado.\n    \n\n### 4\\. Deletar Todos os Dados de Previsão do Tempo\n\n- **Método e Caminho**: `DELETE /delete-all`\n- **Descrição**: Remove todos os dados de previsão do tempo do banco de dados.\n    \n\n### 5\\. Deletar Dados de Previsão do Tempo por ID\n\n- **Método e Caminho**: `DELETE /delete-by-id/{document_id}`\n- **Parâmetros**:\n    - `document_id`: ID do documento a ser removido do banco de dados.\n- **Descrição**: Remove um documento de previsão do tempo específico, identificado pelo ID fornecido.\n    \n\n### 6\\. Login\n\n- **Método e Caminho**: `POST /login`\n- **Parâmetros**:\n    - `username`: Nome de usuário para login.\n    - `password`: Senha para login.\n- **Descrição**: Endpoint para realizar o login. Retorna um token JWT se o login for bem-sucedido.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20375807"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Weather Forecast",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Weather data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Weather data by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete all weather data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoicm9vdCIsImV4cGlyZXMiOjE3MDE0Nzk5MDguODA1ODMzfQ.Knc6_OkLEZuxvqdWIT0spnpmqNK0TBF7HPVpjNrrHOM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/weather/delete-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"weather",
+						"delete-all"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete weather data by id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoicm9vdCIsImV4cGlyZXMiOjE3MDE0Nzk5MDguODA1ODMzfQ.Knc6_OkLEZuxvqdWIT0spnpmqNK0TBF7HPVpjNrrHOM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000?document_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"query": [
+						{
+							"key": "document_id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -29,6 +29,10 @@ Obs.: há também endpoints onde os dados do banco de dados são retornados, nao
 6.  **Uso dos Endpoints Autenticados**:
     - Agora você pode usar todos os endpoints autenticados (tempo de expiração do token é de 20 minutos).
 
+## Postman
+
+Na pasta raiz do projeto você encontra um arquivo para importar no postman com as collections , o arquivo se chama "OpenWeather.postman_collection"
+
 # Como rodar os testes
 
 Em um terminal, independente de ja estar rodando a aplicação ou não, execute:
