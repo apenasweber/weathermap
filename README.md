@@ -1,3 +1,28 @@
+# WeatherMap - Backend Python Application
+
+## Descrição
+
+WeatherMap é uma aplicação de backend desenvolvida em Python, projetada para fornecer informações sobre a previsão do tempo para os próximos dias. Utilizando a API de previsão do tempo de 5 dias do [OpenWeatherMap](https://openweathermap.org/), esta aplicação não só busca dados atualizados sobre o clima, mas também armazena o histórico de chamadas para consultas posteriores. A aplicação é ideal para aqueles que precisam de informações rápidas e confiáveis sobre as condições meteorológicas.
+
+## Requisitos e Bônus do Desafio Técnico
+
+### Requisitos Completos
+
+- [x] **Linguagem de Programação Python**: Desenvolvida inteiramente em Python.
+- [x] **Banco de Dados Não Relacional**: Utilização do MongoDB, um banco de dados não relacional.
+- [x] **Bibliotecas e Frameworks Livres**: Usado FastApi pela capacidade de uso com banco nosql, arquitetura customizável.
+- [x] **Chamadas de API Diretas**: API do OpenWeatherMap utilizada também diretamente com postman e swagger.
+- [x] **README com Instruções**: Documentação detalhada sobre como configurar e executar a aplicação.
+
+### Bônus Completos
+
+- [x] **Artefatos Adicionais**: Inclusão de collections do Postman e testes unitários no repositório.
+
+### Extras
+
+- [x] ** Commits semânticos**: melhor organização, padronização e transparência ao que foi feito.
+- [x] ** Containerização**: aplicação fácil de executar, portátil, consistente, eficiente e simples.
+
 # Como rodar a aplicação
 
 #### Requisitos mínimos
@@ -11,13 +36,21 @@ Obs.: há também endpoints onde os dados do banco de dados são retornados, nao
 
 1.  **Clonar o Repositório**:
 
-    `git clone https://github.com/apenasweber/weathermap.git`
-    `cd backend-python-creditcard`
+```bash
+git clone https://github.com/apenasweber/weathermap.git
+```
+
+```bash
+cd weathermap
+```
 
 2.  **Renomear o Arquivo de Configuração**:
-    - Renomeie o arquivo ".env-example" para ".env".
-3.  **Construir e Executar a Aplicação e os Testes**:
-    - Utilize o comando `docker-compose up --build` para construir/executar a aplicação.
+    - Renomeie o arquivo `.env-example` para `.env`
+3.  **Construir e Executar a Aplicação/Testes**:
+    - Utilize para construir/executar a aplicação o comando:
+    ```bash
+    -docker-compose up --build
+    ```
 4.  **Acessar a Documentação da API**:
     - Agora você pode acessar [http://localhost:8000/docs](http://localhost:8000/docs) para testar os endpoints manualmente.
 5.  **Login e Autenticação**:
@@ -36,7 +69,10 @@ Na pasta raiz do projeto você encontra um arquivo para importar no postman com 
 # Como rodar os testes
 
 Em um terminal, independente de ja estar rodando a aplicação ou não, execute:
-`docker-compose up --build test`
+
+```bash
+docker-compose up --build test
+```
 
 # Endpoints da API
 
