@@ -17,6 +17,3 @@ COPY . .
 
 # Comando para iniciar o servidor Uvicorn com recarga
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
-
-# Comando para iniciar o servidor Uvicorn com suporte a debug
-#CMD ["python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "--wait-for-client", "app/main.py"]

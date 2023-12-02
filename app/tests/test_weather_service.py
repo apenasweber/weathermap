@@ -4,9 +4,9 @@ import pytest
 import requests
 
 from app.models.open_weather_models import OpenWeatherResponse
-from app.services.open_weather_service import OpenWeatherMapsAPI, save_weather_data
+from app.services.open_weather_service import (OpenWeatherMapsAPI,
+                                               save_weather_data)
 
-# Constants for tests
 VALID_CITY = "Berlin"
 VALID_LAT = 52.5200
 VALID_LON = 13.4050
@@ -16,7 +16,6 @@ INVALID_LON = -1000.0
 API_KEY = "test_api_key"
 FORECAST_URL = "http://api.openweathermap.org/data/2.5/forecast"
 
-# Sample response data
 SAMPLE_WEATHER_DATA = {
     "cod": "200",
     "message": 0,
@@ -107,7 +106,7 @@ def test_process_weather_forecast_by_city(open_weather_api):
         with patch("app.services.open_weather_service.save_weather_data") as mock_save:
             result = open_weather_api.get_weather_forecast_by_city(VALID_CITY)
             assert result is not None
-            # Acessar a instância de City e em seguida o atributo 'name'
+            # Acessa a instância de City e em seguida o atributo 'name'
             assert result["city"].name == "Canoas"
             mock_save.assert_called_once()
 

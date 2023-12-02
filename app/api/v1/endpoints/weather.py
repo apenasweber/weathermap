@@ -5,11 +5,9 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app.api.v1.auth.auth_bearer import JWTBearer
 from app.db.mongo_client import MongoDB
-from app.models.api_response_models import (
-    SimpleForecast,
-    SimpleWeatherCondition,
-    WeatherForecastResponse,
-)
+from app.models.api_response_models import (SimpleForecast,
+                                            SimpleWeatherCondition,
+                                            WeatherForecastResponse)
 from app.services.open_weather_service import OpenWeatherMapsAPI
 
 router = APIRouter()

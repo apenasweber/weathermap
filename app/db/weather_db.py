@@ -15,8 +15,8 @@ def save_weather_data(weather_data: WeatherForecastResponse):
         weather_data_dict = weather_data.model_dump(by_alias=True, exclude_none=True)
         # Inserindo os dados no MongoDB
         weather_collection.insert_one(weather_data_dict)
-        logger.info("Weather data saved successfully")
+        logger.info("Dados salvos com sucesso!")
 
     except Exception as e:
-        logger.error("Error occurred while saving the data to database", exc_info=e)
+        logger.error("Ocorreu um erro ao salvar no banco de dados", exc_info=e)
         raise
