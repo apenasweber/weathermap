@@ -1,7 +1,8 @@
-from pymongo import MongoClient
-from app.core.config import settings
 import logging
 
+from pymongo import MongoClient
+
+from app.core.config import settings
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

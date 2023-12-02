@@ -1,15 +1,10 @@
+from unittest.mock import MagicMock, patch
+
 import pytest
-from unittest.mock import patch, MagicMock
-from app.services.open_weather_service import OpenWeatherMapsAPI
 import requests
-import pytest
-from unittest.mock import patch, MagicMock
-from app.services.open_weather_service import OpenWeatherMapsAPI
-import requests
+
 from app.models.open_weather_models import OpenWeatherResponse
-from app.services.open_weather_service import (
-    save_weather_data,
-)
+from app.services.open_weather_service import OpenWeatherMapsAPI, save_weather_data
 
 # Constants for tests
 VALID_CITY = "Berlin"

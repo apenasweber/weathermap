@@ -1,9 +1,11 @@
-from typing import Dict, List, Optional
-import requests
 import logging
+from typing import Dict, List, Optional
+
+import requests
+
+from app.core.config import settings
 from app.db.weather_db import save_weather_data
 from app.models.open_weather_models import OpenWeatherResponse
-from app.core.config import settings
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

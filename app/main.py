@@ -1,10 +1,10 @@
-from fastapi import FastAPI
 from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.endpoints import weather
 from app.api.v1.endpoints.login import login_router
-
-from fastapi.middleware.cors import CORSMiddleware
 from app.db.mongo_client import MongoDB
 
 

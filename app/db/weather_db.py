@@ -1,6 +1,7 @@
+import logging
+
 from app.db.mongo_client import MongoDB
 from app.models.api_response_models import WeatherForecastResponse
-import logging
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
